@@ -1,5 +1,5 @@
 
-import { Mail, Phone, MapPin } from "lucide-react";
+import { Mail, Phone, MapPin, Heart, Users, Brain } from "lucide-react";
 
 const Footer = () => {
   return (
@@ -11,34 +11,40 @@ const Footer = () => {
               ClinEdit
             </h3>
             <p className="text-gray-400 mb-4 max-w-md">
-              Revolutionizing clinical research through AI-powered automation and intelligence. 
-              Helping pharmaceutical companies bring life-saving treatments to market faster.
+              Revolutionizing clinical research through inclusive patient outreach, AI-powered matching, 
+              and intelligent automation. Connecting communities and advancing medical discoveries together.
             </p>
             <div className="flex space-x-4">
               <div className="flex items-center text-gray-400">
                 <Mail className="h-4 w-4 mr-2" />
-                <span>contact@clinedit.com</span>
+                <span>connect@clinedit.com</span>
               </div>
             </div>
           </div>
 
           <div>
-            <h4 className="text-white font-semibold mb-4">Solutions</h4>
+            <h4 className="text-white font-semibold mb-4 flex items-center">
+              <Heart className="h-4 w-4 mr-2 text-pink-400" />
+              For Patients
+            </h4>
             <ul className="space-y-2">
-              <li><a href="#" className="text-gray-400 hover:text-blue-400 transition-colors">Clinical Data Management</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-blue-400 transition-colors">Regulatory Compliance</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-blue-400 transition-colors">AI Analytics</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-blue-400 transition-colors">Report Generation</a></li>
+              <li><a href="#" className="text-gray-400 hover:text-pink-400 transition-colors">Free Consultations</a></li>
+              <li><a href="#" className="text-gray-400 hover:text-pink-400 transition-colors">Community Matching</a></li>
+              <li><a href="#" className="text-gray-400 hover:text-pink-400 transition-colors">LGBTQ+ Support</a></li>
+              <li><a href="#" className="text-gray-400 hover:text-pink-400 transition-colors">Patient Networks</a></li>
             </ul>
           </div>
 
           <div>
-            <h4 className="text-white font-semibold mb-4">Company</h4>
+            <h4 className="text-white font-semibold mb-4 flex items-center">
+              <Brain className="h-4 w-4 mr-2 text-blue-400" />
+              For Researchers
+            </h4>
             <ul className="space-y-2">
-              <li><a href="#" className="text-gray-400 hover:text-blue-400 transition-colors">About Us</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-blue-400 transition-colors">Careers</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-blue-400 transition-colors">Privacy Policy</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-blue-400 transition-colors">Terms of Service</a></li>
+              <li><a href="#" className="text-gray-400 hover:text-blue-400 transition-colors">Outreach Automation</a></li>
+              <li><a href="#" className="text-gray-400 hover:text-blue-400 transition-colors">Smart Scheduling</a></li>
+              <li><a href="#" className="text-gray-400 hover:text-blue-400 transition-colors">Registry Integration</a></li>
+              <li><a href="#" className="text-gray-400 hover:text-blue-400 transition-colors">Cross-Study Analysis</a></li>
             </ul>
           </div>
         </div>
@@ -48,8 +54,9 @@ const Footer = () => {
             <p className="text-gray-400 text-sm">
               © 2024 ClinEdit. All rights reserved.
             </p>
-            <p className="text-gray-400 text-sm mt-2 md:mt-0">
-              Transforming clinical research with artificial intelligence.
+            <p className="text-gray-400 text-sm mt-2 md:mt-0 flex items-center">
+              <Users className="h-4 w-4 mr-2" />
+              Connecting patients and researchers through inclusive AI.
             </p>
           </div>
         </div>
