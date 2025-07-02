@@ -1,8 +1,10 @@
 
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Users, Heart, Brain } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const Hero = () => {
+  const navigate = useNavigate();
   return (
     <section className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900">
       {/* Animated background elements */}
@@ -50,9 +52,10 @@ const Hero = () => {
             <Button 
               variant="outline" 
               size="lg"
-              className="border-gray-600 text-gray-300 hover:bg-gray-800 hover:text-white px-8 py-4 text-lg"
+              className="border-gray-600 text-gray-300 hover:bg-gray-800 hover:text-white px-8 py-4 text-lg btn"
+              onClick={() => navigate('/questionnaire')}
             >
-              Explore Platform
+              Let’s Talk
             </Button>
           </div>
 
