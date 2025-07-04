@@ -2,25 +2,28 @@ import express from 'express';
 import { PrismaClient } from '@prisma/client';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import authRoutes from "./routes/auth.js"; 
 
-dotenv.config(); // ✅ Load .env variables
+
+dotenv.config(); 
 
 const prisma = new PrismaClient();
 const app = express();
 const PORT = 4000;
 
-// ✅ CORS must be enabled BEFORE defining routes
 app.use(cors({
-  origin: 'http://localhost:8080', // Your frontend dev URL
+  origin: 'http://localhost:8080', // frontend dev URL
   methods: ['GET', 'POST', 'OPTIONS'],
   allowedHeaders: ['Content-Type'],
 }));
 
-// ✅ Body parser middleware
 app.use(express.json());
+
+app.use("/api/auth", authRoutes);
 
 app.post('/api/patient', async (req, res) => {
   try {
+    console.log('📥 Incoming data:', req.body);
     const {
       fullName,
       dateOfBirth,
@@ -37,6 +40,7 @@ app.post('/api/patient', async (req, res) => {
       nationality,
       relationshipStatus,
     } = req.body;
+
 
     const newPatient = await prisma.patient.create({
       data: {
@@ -63,6 +67,22 @@ app.post('/api/patient', async (req, res) => {
     res.status(500).json({ error: 'Failed to save patient data' });
   }
 });
+
+app.post('/api/researcher', async (req, res) => {
+  try {
+    const data = req.body;
+
+    const newResearcher = await prisma.researcher.create({
+      data,
+    });
+
+    res.status(201).json(newResearcher);
+  } catch (error) {
+    console.error("❌ Error saving researcher data:", error);
+    res.status(500).json({ error: 'Failed to save researcher data' });
+  }
+});
+
 
 app.listen(PORT, () => {
   console.log(`🚀 Server running on http://localhost:${PORT}`);

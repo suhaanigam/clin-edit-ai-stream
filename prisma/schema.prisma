@@ -31,3 +31,28 @@ model Patient {
   relationshipStatus  String?
   submittedAt         DateTime @default(now())
 }
+
+model Researcher {
+  id                    Int      @id @default(autoincrement())
+  fullName              String
+  email                 String
+  institution           String?
+  country               String?
+  typeOfResearch        String?
+  targetDiseases        String?
+  interestedInCollab    String?
+  needsAutomation       String?
+  automationPreferences String?
+  pricingInterest       String?
+  notes                 String?
+  submittedAt           DateTime @default(now())
+}
+
+model User {
+  id        String   @id @default(uuid())
+  username  String   @unique
+  email     String?  @unique
+  phone     String?  @unique
+  password  String
+  createdAt DateTime @default(now())
+}

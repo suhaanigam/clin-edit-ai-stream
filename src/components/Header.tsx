@@ -1,10 +1,24 @@
-
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [user, setUser] = useState<{ username: string } | null>(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const savedUser = localStorage.getItem("user");
+    if (savedUser) setUser(JSON.parse(savedUser));
+  }, []);
+
+  const logout = () => {
+    localStorage.removeItem("user");
+    setUser(null);
+    navigate("/");
+  };
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-gray-900/95 backdrop-blur-sm border-b border-gray-800">
@@ -36,9 +50,23 @@ const Header = () => {
           </nav>
 
           <div className="hidden md:block">
-            <Button className="bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white">
-              Get Started
-            </Button>
+            {!user ? (
+              <Link to="/register">
+                <Button className="bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white">
+                  Register / Sign in
+                </Button>
+              </Link>
+            ) : (
+              <>
+                <span className="text-gray-300 mr-4">Hallo, {user.username}</span>
+                <Button
+                  onClick={logout}
+                  className="bg-gradient-to-r from-red-600 to-pink-600 hover:from-red-700 hover:to-pink-700 text-white"
+                >
+                  Logout
+                </Button>
+              </>
+            )}
           </div>
 
           <div className="md:hidden">
@@ -66,9 +94,24 @@ const Header = () => {
               <a href="#contact" className="text-gray-300 hover:text-blue-400 block px-3 py-2 rounded-md text-base font-medium">
                 Contact
               </a>
-              <Button className="w-full mt-2 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white">
-                Get Started
-              </Button>
+              {/* your menu links */}
+              {!user ? (
+                <Link to="/register">
+                  <Button className="w-full mt-2 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white">
+                    Register / Sign in
+                  </Button>
+                </Link>
+              ) : (
+                <>
+                  <span className="block px-3 py-2 text-gray-300">Hallo, {user.username}</span>
+                  <Button
+                    onClick={logout}
+                    className="w-full mt-2 bg-gradient-to-r from-red-600 to-pink-600 hover:from-red-700 hover:to-pink-700 text-white"
+                  >
+                    Logout
+                  </Button>
+                </>
+              )}
             </div>
           </div>
         )}

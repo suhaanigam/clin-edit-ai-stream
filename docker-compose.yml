@@ -1,0 +1,45 @@
+version: "3.8"
+
+services:
+  frontend:
+    build:
+      context: .        # root folder
+      dockerfile: src/Dockerfile
+    ports:
+      - "8080:8080"
+    #volumes:
+      #- ./src:/app/src
+      #- /app/node_modules
+    depends_on:
+      - backend
+    working_dir: /app
+    command: ["npm", "run", "dev"]
+
+  backend:
+    build: .
+    ports:
+      - "4000:4000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    depends_on:
+      - db
+    working_dir: /app
+    command: ["node", "server.js"]
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/mydb
+
+  db:
+    image: postgres:14
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: mydb
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
